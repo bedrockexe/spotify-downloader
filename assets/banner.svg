@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c130f"/>
+      <stop offset="1" stop-color="#060606"/>
+    </linearGradient>
+    <linearGradient id="logo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1ed760"/>
+      <stop offset="1" stop-color="#159f45"/>
+    </linearGradient>
+    <linearGradient id="cover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1ed760"/>
+      <stop offset="1" stop-color="#0c7d38"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1ed760" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#1ed760" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#0f8a3f" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#0f8a3f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background + ambient glow -->
+  <rect width="1200" height="340" rx="0" fill="url(#bg)"/>
+  <ellipse cx="240" cy="10" rx="440" ry="280" fill="url(#glowA)"/>
+  <ellipse cx="1050" cy="330" rx="470" ry="300" fill="url(#glowB)"/>
+
+  <!-- Logo mark (brand equalizer square, scaled from the 64u favicon) -->
+  <g transform="translate(92,120) scale(1.5625)">
+    <rect width="64" height="64" rx="18" fill="url(#logo)"/>
+    <g fill="#08130c">
+      <rect x="17" y="26" width="5" height="12" rx="2.5"/>
+      <rect x="26" y="20" width="5" height="24" rx="2.5"/>
+      <rect x="35" y="15" width="5" height="34" rx="2.5"/>
+      <rect x="44" y="24" width="5" height="16" rx="2.5"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="224" y="152" fill="#1ed760" font-size="20" font-weight="700" letter-spacing="5">SPOTIFY &#8594; M4A</text>
+  <text x="222" y="210" fill="#ffffff" font-size="58" font-weight="800" letter-spacing="-1">Spotify Downloader</text>
+  <text x="224" y="245" fill="#b3b3b3" font-size="21" font-weight="500">Playlists, albums &amp; tracks &#8594; clean, tagged .m4a files.</text>
+
+  <!-- Feature pills -->
+  <g font-size="15" font-weight="600" text-anchor="middle">
+    <g>
+      <rect x="222" y="264" width="108" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="#1ed760" stroke-opacity="0.35"/>
+      <text x="276" y="286" fill="#d7d7d7">Cover art</text>
+    </g>
+    <g>
+      <rect x="342" y="264" width="102" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="#1ed760" stroke-opacity="0.35"/>
+      <text x="393" y="286" fill="#d7d7d7">Metadata</text>
+    </g>
+    <g>
+      <rect x="456" y="264" width="132" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="#1ed760" stroke-opacity="0.35"/>
+      <text x="522" y="286" fill="#d7d7d7">Synced lyrics</text>
+    </g>
+    <g>
+      <rect x="600" y="264" width="210" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="#1ed760" stroke-opacity="0.35"/>
+      <text x="705" y="286" fill="#d7d7d7">No ffmpeg &#183; native AAC</text>
+    </g>
+  </g>
+
+  <!-- Right-side "album art" motif -->
+  <g opacity="0.96">
+    <rect x="946" y="92" width="150" height="150" rx="20" fill="#10301c" transform="rotate(-7 1021 167)"/>
+    <g transform="rotate(5 1050 165)">
+      <rect x="975" y="90" width="150" height="150" rx="20" fill="url(#cover)"/>
+      <!-- beamed eighth notes -->
+      <g fill="#08130c" transform="translate(975,90)">
+        <rect x="52" y="44" width="7" height="60" rx="2"/>
+        <rect x="96" y="38" width="7" height="66" rx="2"/>
+        <rect x="52" y="38" width="51" height="11" rx="3"/>
+        <ellipse cx="46" cy="106" rx="16" ry="12"/>
+        <ellipse cx="90" cy="100" rx="16" ry="12"/>
+      </g>
+    </g>
+  </g>
+</svg>

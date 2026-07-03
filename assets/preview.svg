@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c130f"/><stop offset="1" stop-color="#060606"/>
+    </linearGradient>
+    <radialGradient id="pglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1ed760" stop-opacity="0.22"/><stop offset="1" stop-color="#1ed760" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="c1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8787"/><stop offset="1" stop-color="#e03131"/></linearGradient>
+    <linearGradient id="c2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#63e6be"/><stop offset="1" stop-color="#0ca678"/></linearGradient>
+    <linearGradient id="c3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#74c0fc"/><stop offset="1" stop-color="#1971c2"/></linearGradient>
+    <linearGradient id="c4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd43b"/><stop offset="1" stop-color="#e8590c"/></linearGradient>
+    <linearGradient id="c5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b197fc"/><stop offset="1" stop-color="#6741d9"/></linearGradient>
+    <clipPath id="mosaic"><rect x="72" y="108" width="120" height="120" rx="16"/></clipPath>
+  </defs>
+
+  <rect width="1000" height="600" fill="url(#pbg)"/>
+  <ellipse cx="300" cy="40" rx="500" ry="300" fill="url(#pglow)"/>
+
+  <!-- App window -->
+  <rect x="40" y="40" width="920" height="520" rx="24" fill="#121212" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <!-- Title bar -->
+  <circle cx="72" cy="64" r="6" fill="#ff5f56"/><circle cx="92" cy="64" r="6" fill="#ffbd2e"/><circle cx="112" cy="64" r="6" fill="#27c93f"/>
+  <rect x="150" y="52" width="280" height="24" rx="12" fill="#0c0c0c" stroke="#ffffff" stroke-opacity="0.06"/>
+  <text x="166" y="68" fill="#8a8a8a" font-size="13">127.0.0.1:5000</text>
+  <line x1="40" y1="88" x2="960" y2="88" stroke="#ffffff" stroke-opacity="0.06"/>
+
+  <!-- Collection header: cover mosaic -->
+  <g clip-path="url(#mosaic)">
+    <rect x="72" y="108" width="57" height="57" fill="url(#c1)"/>
+    <rect x="135" y="108" width="57" height="57" fill="url(#c3)"/>
+    <rect x="72" y="171" width="57" height="57" fill="url(#c4)"/>
+    <rect x="135" y="171" width="57" height="57" fill="url(#c5)"/>
+  </g>
+
+  <text x="214" y="132" fill="#1ed760" font-size="14" font-weight="700" letter-spacing="2">PLAYLIST &#183; 12 SONGS &#183; 47 MIN</text>
+  <text x="212" y="171" fill="#ffffff" font-size="32" font-weight="800" letter-spacing="-0.5">Chill Mix</text>
+  <text x="214" y="197" fill="#b3b3b3" font-size="14">Downloading tracks&#8230;</text>
+  <rect x="214" y="207" width="340" height="8" rx="4" fill="#0c0c0c" stroke="#ffffff" stroke-opacity="0.08"/>
+  <rect x="214" y="207" width="200" height="8" rx="4" fill="#1ed760"/>
+  <text x="566" y="215" fill="#1ed760" font-size="13" font-weight="700">7 / 12</text>
+
+  <line x1="72" y1="252" x2="928" y2="252" stroke="#ffffff" stroke-opacity="0.07"/>
+
+  <!-- Track rows -->
+  <!-- Row 1: done -->
+  <polyline points="86,290 90,294 98,285" fill="none" stroke="#1ed760" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="118" y="272" width="44" height="44" rx="9" fill="url(#c2)"/>
+  <text x="176" y="290" fill="#ffffff" font-size="16" font-weight="700">Sunset Drive</text>
+  <text x="176" y="309" fill="#9a9a9a" font-size="13">The Midnights</text>
+  <text x="764" y="299" fill="#9a9a9a" font-size="14" text-anchor="end">3:42</text>
+  <rect x="792" y="281" width="124" height="26" rx="13" fill="#1ed760" fill-opacity="0.14"/>
+  <text x="854" y="298" fill="#1ed760" font-size="12.5" font-weight="700" text-anchor="middle">Done</text>
+
+  <!-- Row 2: done -->
+  <polyline points="86,344 90,348 98,339" fill="none" stroke="#1ed760" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="118" y="326" width="44" height="44" rx="9" fill="url(#c4)"/>
+  <text x="176" y="344" fill="#ffffff" font-size="16" font-weight="700">Golden Hour</text>
+  <text x="176" y="363" fill="#9a9a9a" font-size="13">Marlowe</text>
+  <text x="764" y="353" fill="#9a9a9a" font-size="14" text-anchor="end">4:05</text>
+  <rect x="792" y="335" width="124" height="26" rx="13" fill="#1ed760" fill-opacity="0.14"/>
+  <text x="854" y="352" fill="#1ed760" font-size="12.5" font-weight="700" text-anchor="middle">Done</text>
+
+  <!-- Row 3: downloading -->
+  <circle cx="92" cy="402" r="9" fill="none" stroke="#1ed760" stroke-opacity="0.3" stroke-width="2"/>
+  <circle cx="92" cy="402" r="4" fill="#1ed760"/>
+  <rect x="118" y="380" width="44" height="44" rx="9" fill="url(#c3)"/>
+  <text x="176" y="398" fill="#ffffff" font-size="16" font-weight="700">Paper Planes</text>
+  <text x="176" y="417" fill="#9a9a9a" font-size="13">Cassette Kids</text>
+  <text x="764" y="407" fill="#9a9a9a" font-size="14" text-anchor="end">3:18</text>
+  <rect x="792" y="389" width="124" height="26" rx="13" fill="#1ed760" fill-opacity="0.12"/>
+  <text x="854" y="406" fill="#1ed760" font-size="12.5" font-weight="700" text-anchor="middle">Downloading</text>
+
+  <!-- Row 4: queued -->
+  <text x="92" y="462" fill="#7a7a7a" font-size="15" font-weight="600" text-anchor="middle">4</text>
+  <rect x="118" y="434" width="44" height="44" rx="9" fill="url(#c1)"/>
+  <text x="176" y="452" fill="#d0d0d0" font-size="16" font-weight="700">Neon Rain</text>
+  <text x="176" y="471" fill="#9a9a9a" font-size="13">Vega</text>
+  <text x="764" y="461" fill="#9a9a9a" font-size="14" text-anchor="end">2:56</text>
+  <rect x="792" y="443" width="124" height="26" rx="13" fill="#ffffff" fill-opacity="0.05"/>
+  <text x="854" y="460" fill="#8a8a8a" font-size="12.5" font-weight="700" text-anchor="middle">Queued</text>
+
+  <!-- Row 5: queued -->
+  <text x="92" y="516" fill="#7a7a7a" font-size="15" font-weight="600" text-anchor="middle">5</text>
+  <rect x="118" y="488" width="44" height="44" rx="9" fill="url(#c5)"/>
+  <text x="176" y="506" fill="#d0d0d0" font-size="16" font-weight="700">Slow Motion</text>
+  <text x="176" y="525" fill="#9a9a9a" font-size="13">Hale &amp; Co.</text>
+  <text x="764" y="515" fill="#9a9a9a" font-size="14" text-anchor="end">4:21</text>
+  <rect x="792" y="497" width="124" height="26" rx="13" fill="#ffffff" fill-opacity="0.05"/>
+  <text x="854" y="514" fill="#8a8a8a" font-size="12.5" font-weight="700" text-anchor="middle">Queued</text>
+</svg>
