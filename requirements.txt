@@ -1,0 +1,13 @@
+# Core engine
+spotipy>=2.23
+ytmusicapi>=1.5
+yt-dlp>=2024.1
+mutagen>=1.47
+requests>=2.31
+python-dotenv>=1.0
+
+# Web front-end
+Flask>=3.0
+
+# Desktop front-end uses tkinter, which ships with Python (no pip install).
+# No ffmpeg required: audio is kept as native .m4a (AAC).

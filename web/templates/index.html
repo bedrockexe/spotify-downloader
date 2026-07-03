@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Downloader</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Ambient drifting background -->
+    <div class="bg" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grain"></div>
+    </div>
+
+    <!-- ---------- Top bar ---------- -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="logo">
+                <svg viewBox="0 0 64 64" width="40" height="40" role="img" aria-label="logo">
+                    <defs>
+                        <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#1ed760"/>
+                            <stop offset="1" stop-color="#159f45"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="64" height="64" rx="18" fill="url(#lg)"/>
+                    <g fill="#08130c" class="logo-bars">
+                        <rect x="17" y="26" width="5" height="12" rx="2.5"/>
+                        <rect x="26" y="20" width="5" height="24" rx="2.5"/>
+                        <rect x="35" y="15" width="5" height="34" rx="2.5"/>
+                        <rect x="44" y="24" width="5" height="16" rx="2.5"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-name">Spotify <span class="arrow">&#8594;</span> M4A</span>
+                <span class="brand-sub">Downloader</span>
+            </div>
+        </div>
+
+        <div class="auth">
+            {% if logged_in %}
+            <span class="chip chip-ok">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.4-.7.5-1 .3-2.8-1.7-6.3-2.1-10.5-1.1-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4.6-1 8.5-.6 11.6 1.3.4.2.5.6.2 1zm1.5-3.3c-.3.4-.8.6-1.2.3-3.2-2-8.1-2.5-11.9-1.4-.5.1-1-.1-1.1-.6-.1-.5.1-1 .6-1.1 4.4-1.3 9.8-.7 13.5 1.6.4.2.5.8.1 1.2zm.1-3.4C15.5 5.9 8.8 5.7 5 6.8c-.6.2-1.2-.2-1.3-.7-.2-.6.2-1.2.7-1.3 4.4-1.3 11.8-1.1 16.4 1.7.5.3.7 1 .4 1.5-.3.4-1 .6-1.5.3z"/></svg>
+                {{ display_name or "Logged in" }}
+            </span>
+            <a class="link-muted" href="{{ url_for('logout') }}">Log out</a>
+            {% else %}
+            <a class="chip chip-login" href="{{ url_for('login') }}">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.4-.7.5-1 .3-2.8-1.7-6.3-2.1-10.5-1.1-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4.6-1 8.5-.6 11.6 1.3.4.2.5.6.2 1zm1.5-3.3c-.3.4-.8.6-1.2.3-3.2-2-8.1-2.5-11.9-1.4-.5.1-1-.1-1.1-.6-.1-.5.1-1 .6-1.1 4.4-1.3 9.8-.7 13.5 1.6.4.2.5.8.1 1.2zm.1-3.4C15.5 5.9 8.8 5.7 5 6.8c-.6.2-1.2-.2-1.3-.7-.2-.6.2-1.2.7-1.3 4.4-1.3 11.8-1.1 16.4 1.7.5.3.7 1 .4 1.5-.3.4-1 .6-1.5.3z"/></svg>
+                Log in with Spotify
+            </a>
+            <span class="hint">needed for playlists</span>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="shell">
+        <!-- ---------- Hero / input ---------- -->
+        <section class="hero">
+            <h1>Turn any Spotify link<br><span class="accent">into clean audio files</span></h1>
+            <p class="tagline">Paste a playlist, album, or track. Preview every song with its cover art, then download the lot as tagged&nbsp;.m4a — artwork, metadata &amp; lyrics baked in.</p>
+
+            <form id="form" autocomplete="off">
+                <div class="field">
+                    <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    <input type="text" id="url" name="url" placeholder="https://open.spotify.com/playlist/…" required>
+                </div>
+                <button type="submit" id="go" class="btn"><span class="btn-label">Load tracks</span></button>
+            </form>
+
+            <div id="error" class="error hidden"></div>
+        </section>
+
+        <!-- ---------- Collection header (appears after preview) ---------- -->
+        <section id="collection" class="collection hidden">
+            <div id="cover" class="collection-cover" aria-hidden="true"></div>
+
+            <div class="collection-body">
+                <span id="kicker" class="kicker">COLLECTION</span>
+                <h2 id="coll-name">—</h2>
+                <p id="coll-sub" class="coll-sub"></p>
+
+                <div class="collection-actions">
+                    <button type="button" id="download" class="btn"><span class="btn-label">Download all</span></button>
+                    <a id="save" class="btn btn-save hidden" href="#" download>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <span id="save-label">Download ZIP</span>
+                    </a>
+                    <button type="button" id="retry" class="btn btn-ghost hidden">
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                        </svg>
+                        <span class="btn-label">Retry failed</span>
+                    </button>
+                    <button type="button" id="reset" class="btn btn-ghost hidden">
+                        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Convert another
+                    </button>
+
+                    <div id="overall" class="overall hidden">
+                        <div class="bar"><div id="fill" class="fill"></div></div>
+                        <span id="overall-text" class="overall-text"></span>
+                    </div>
+                </div>
+
+                <p id="notice" class="notice hidden"></p>
+            </div>
+        </section>
+
+        <!-- ---------- Track list ---------- -->
+        <section id="tracklist" class="tracklist hidden"></section>
+    </main>
+
+    <footer class="foot">
+        <span>Personal use only · audio kept as native .m4a (no re-encode)</span>
+    </footer>
+
+    <template id="track-tpl">
+        <div class="track" data-status="queued">
+            <div class="track-index">
+                <span class="num"></span>
+                <span class="spinner" aria-hidden="true"></span>
+                <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg class="cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div class="track-cover">
+                <img alt="" loading="lazy">
+                <svg class="note" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3z"/></svg>
+            </div>
+            <div class="track-main">
+                <span class="track-title"></span>
+                <span class="track-artist"></span>
+            </div>
+            <span class="track-album"></span>
+            <span class="track-duration"></span>
+            <span class="track-state"></span>
+            <button type="button" class="track-dl" title="Download this track" aria-label="Download this track">
+                <svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span class="dl-spin" aria-hidden="true"></span>
+            </button>
+        </div>
+    </template>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
